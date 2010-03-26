@@ -69,12 +69,12 @@ module Cisco
     	list.each { |line|
 			if m=regexp.match(line) then
 				@interfaces[m[1]] = Cisco::Interface.new(:port => m[1], 
-							:name => m[3].strip, 
-							:status => m[4], 
-							:vlan => m[6], 
-							:duplex => m[8], 
-							:speed => m[10], 
-							:type => m[12])
+                    :name => m[3].strip, 
+			        :status => m[4], 
+			        :vlan => m[6], 
+			        :duplex => m[8], 
+			        :speed => m[10], 
+			        :type => m[12])
 			end
 		}
 
@@ -82,10 +82,8 @@ module Cisco
     	@cmdbuf = old_cmd
     end
 
-	def list_ifaces
-		@interfaces.each_key { |k|
-			puts @interfaces[k].port
-		}
+	def list_interfaces
+		@interfaces.keys
 	end
 
     private

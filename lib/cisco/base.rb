@@ -56,8 +56,8 @@ module Cisco
 		@transport.load_interfaces(&block)
 	end
 
-	def interfaces(&block)
-		@transport.list_ifaces(&block)
+	def list_interfaces(&block)
+		@transport.list_interfaces(&block)
 	end
 
   end

@@ -6,16 +6,16 @@ back the output of those commands.
 
 To install:
 
-git clone git://github.com/yakischloba/ruby-cisco.git
+git clone git://github.com/rottenbytes/ruby-cisco.git
 cd ruby-cisco
 gem build cisco.gemspec
 sudo gem install cisco-<version>.gem
 
 The library provides two styles to use:
 
-cisco = Cisco::Base.new(:host => "10.0.0.1", :password => "accesspass")
+cisco = Cisco::Base.new(:host => "10.0.0.1", :password => "accesspass", :enablepass => "enablepassword")
 cisco.cmd("sh ver")
-cisco.enable("enablepass")
+cisco.enable # will bring extended privileges
 cisco.cmd("sh run")
 output = cisco.run
 
@@ -28,10 +28,8 @@ output = cisco.run do |x|
 	x.cmd("sh run")
 end
 
-SSH and Telnet should be working OK at this time. Unfortunately due to the asynchronous
-design of the Net::SSH library's API, it is not easy to provide an interface for
-operating conditionally on output data in the middle of a session like you may be
-used to, for example:
+SSH and Telnet are included in the original repo. I prefered work on telnet transport 
+as my switches are on a different LAN.
 
 output = device.cmd("show version")
 if output =~ "IOS"
@@ -66,6 +64,13 @@ router.apply!
 
 I have yet to come up with a good way for implementing this that will scale across
 a wide variety of devices. Please let me know if you have input and want to help.
+
+
+Nico.
+
+--
+
+original author :
 
 jakecdouglas@gmail.com
 yakischloba on Freenode
