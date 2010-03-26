@@ -51,6 +51,14 @@ module Cisco
     def enable(*args)
       @transport.enable(*args)
     end
+    
+	def load_interfaces(&block)
+		@transport.load_interfaces(&block)
+	end
+
+	def interfaces(&block)
+		@transport.list_ifaces(&block)
+	end
 
   end
 

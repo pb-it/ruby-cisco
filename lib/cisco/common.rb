@@ -2,27 +2,29 @@ module Cisco
   
   module Common
     
-    attr_accessor :host, :password, :prompt
+    attr_accessor :host, :password, :prompt, :enablepass
     
-    def enable(password, pwprompt = nil)
-      @pwprompt = pwprompt || @pwprompt
-      old = @prompt
-      cmd("enable", @pwprompt)
-      cmd(password, old)
-    end
+	def enable(pwprompt = nil)
+		@pwprompt = pwprompt || @pwprompt
+		old = @prompt
+		cmd("enable", @pwprompt)
+		cmd(@enablepass, old)
+		self.run
+		@enabled=true
+	end
 
     def extra_init(*args)
-			cmd(*args)
-			@extra_init << @cmdbuf.pop
-		end
+		cmd(*args)
+		@extra_init << @cmdbuf.pop
+	end
 		
-		def clear_init
-			@extra_init = []
-		end
+	def clear_init
+		@extra_init = []
+	end
 		
-		def clear_cmd
-			@cmdbuf = []
-		end    
+	def clear_cmd
+		@cmdbuf = []
+	end    
     
   end
   
