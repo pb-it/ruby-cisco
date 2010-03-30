@@ -23,6 +23,14 @@ module Cisco
     def password
       @transport.password
     end
+
+	def interfaces
+	    @transport.interfaces
+	end
+    
+    def hwdata
+	    @transport.hwdata
+	end
     
     def prompt
       @transport.prompt
@@ -59,6 +67,11 @@ module Cisco
 	def list_interfaces(&block)
 		@transport.list_interfaces(&block)
 	end
+	
+	def load_hwdata(&block)
+		@transport.load_hwdata(&block)
+	end
+	
 
   end
 

@@ -19,6 +19,7 @@ module Cisco
 		@loggedin=false
 		@enabled=false
 		@interfaces={}
+		@hwdata={}
     end
 
 	def connect
@@ -84,6 +85,29 @@ module Cisco
 
 	def list_interfaces
 		@interfaces.keys
+	end
+	
+	def load_hwdata
+    	#backup
+    	old_cmd = @cmdbuf
+    	
+    	cmd("show version")
+    	rslt=self.run
+		list = rslt[1].split("\n")
+
+		# drop junk at start & end
+		3.times do list.shift end
+		list.pop
+    	
+    	list.each { |line|
+    	    line.grep(/(.*)\s:\s(.*)/) {
+    	        @hwdata[$1.strip]=$2.strip
+    	    }
+    	
+    	}
+    	
+    	#restore
+    	@cmdbuf = old_cmd
 	end
 
     private

@@ -1,7 +1,7 @@
 module Cisco
 	
 	class Interface
-		attr_accessor :port, :name, :speed, :duplex, :status, :vlan, :type
+		attr_reader :port, :name, :duplex, :status, :vlan, :type, :speed
 
 		def initialize(options)
 			@port = options[:port]
@@ -12,7 +12,6 @@ module Cisco
 			@vlan = options[:vlan] || "1"
 			@type = options[:type] || "10/100/1000BaseTX"
 		end
-		
 	end
 	
 end
