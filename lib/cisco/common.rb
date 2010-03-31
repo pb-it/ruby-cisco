@@ -3,7 +3,7 @@ module Cisco
   module Common
     
     attr_accessor :host, :password, :prompt, :enablepass, :interfaces
-    attr_reader :hwdata
+    attr_reader :hwdata, :vlans
     
 	def enable(pwprompt = nil)
 		@pwprompt = pwprompt || @pwprompt

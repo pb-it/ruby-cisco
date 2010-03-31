@@ -20,6 +20,7 @@ module Cisco
 		@enabled=false
 		@interfaces={}
 		@hwdata={}
+		@vlans={}
     end
 
 	def connect
@@ -109,6 +110,27 @@ module Cisco
     	#restore
     	@cmdbuf = old_cmd
 	end
+
+    def load_vlans
+    	#backup
+    	old_cmd = @cmdbuf
+    	
+    	cmd("show vlan")
+    	rslt=self.run
+		list = rslt[1].split("\n")
+
+		# drop junk at start & end
+		4.times do list.shift end
+    	
+    	list.each { |line|
+    	    line.grep(/^(\d+)\s(.*)\sactive.*/) {
+    	        @vlans[$1.strip]=$2.strip
+    	    }
+    	}
+    	
+    	#restore
+    	@cmdbuf = old_cmd        
+    end
 
     private
 

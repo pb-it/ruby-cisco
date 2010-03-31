@@ -31,6 +31,10 @@ module Cisco
     def hwdata
 	    @transport.hwdata
 	end
+
+    def vlans
+	    @transport.vlans
+	end
     
     def prompt
       @transport.prompt
@@ -72,6 +76,9 @@ module Cisco
 		@transport.load_hwdata(&block)
 	end
 	
+	def load_vlans(&block)
+	    @transport.load_vlans(&block)
+	end
 
   end
 
